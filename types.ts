@@ -3,5 +3,5 @@ export type Transaction = {
     amount: number;
     description: string;
     type: string;
-    date: Date;
+    date: Date | undefined;
 }  

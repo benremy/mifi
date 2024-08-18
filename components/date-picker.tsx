@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/popover"
 
 interface DatePickerProps {
-    date: Date;
+    date: Date | undefined;
     setDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
 }
 

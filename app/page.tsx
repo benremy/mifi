@@ -9,7 +9,7 @@ import Settings from "@/components/settings-widget"
 export default function Home() {
   const [transactions, setTransactions] = useState<Transaction[]>([])
   return (
-    <main className="w-screen h-screen flex flex-wrap">
+    <main className="w-screen flex overflow-hidden">
       <AddTransaction 
         setTransactions={setTransactions}
         transactions={transactions}

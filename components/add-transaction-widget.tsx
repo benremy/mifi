@@ -23,12 +23,14 @@ interface AddTransactionProps {
 }
 
 const AddTransactionWidget: React.FC<AddTransactionProps> = ({ setTransactions, transactions }) => {
-  const [date, setDate] = useState<Date>(new Date())
+  const [date, setDate] = useState<Date | undefined>(new Date())
   const [tabValue, setTabValue] = useState<string>("debit")
   const [amount, setAmount] = useState<number>(0)
-  const [description, setDescription] = useState<string>("")
+  const [description, setDescription] = useState<string>("-")
 
   const addTransaction = () => {
+    if (!amount) return alert("Please enter an amount greater than zero")
+
     const newTransaction: Transaction = {
       id: transactions.length + 1,
       amount: amount,
@@ -45,10 +47,10 @@ const AddTransactionWidget: React.FC<AddTransactionProps> = ({ setTransactions, 
   }
 
   return (
-    <Card className="w-1/2 flex flex-col justify-center items-center m-2">
+    <Card className="h-5/6 w-1/2 flex flex-col justify-center items-center">
       <CardHeader className="items-center">
-        <CardTitle>Ledger</CardTitle>
-        <CardDescription>Track your expenses</CardDescription>
+        <CardTitle>Add Transaction</CardTitle>
+        <CardDescription>Add a transaction to your ledger</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-col items-center">
         <DatePicker date={date} setDate={setDate}/>

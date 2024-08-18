@@ -9,6 +9,8 @@ import {
     CardTitle,
   } from "@/components/ui/card"
 
+  import { Badge } from '@/components/ui/badge'
+
   import {
     Table,
     TableBody,
@@ -30,24 +32,28 @@ const LedgerWidget: React.FC<LedgerWidgetProps> = ({ transactions }) => {
 
     const transactionTable = (
         <Table>
-            <TableCaption>A list of your recent invoices.</TableCaption>
+            <TableCaption>{null}</TableCaption>
             <TableHeader>
                 <TableRow>
-                    <TableHead className="w-[100px]">Invoice</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Method</TableHead>
-                    <TableHead className="text-right">Amount</TableHead>
+                    <TableHead className="w-[100px]">ID</TableHead>
+                    <TableHead>Date</TableHead>
+                    <TableHead>Amount</TableHead>
+                    <TableHead className="text-right">Type</TableHead>
+                    <TableHead>Description</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
                 {transactions.map(t => (
                     <TableRow>
                         <TableCell className="font-medium">{t.id}</TableCell>
-                        <TableCell>{"need fix"}</TableCell>
-                        <TableCell>{t.amount}</TableCell>
-                        <TableCell>{"add shad badge"}</TableCell>
+                        <TableCell className="text-center">
+                            { t.date && `${String(t.date.getMonth() + 1)}/${String(t.date.getDate()).padStart(2, '0')}`}
+                        </TableCell>
+                        <TableCell className="text-center">${t.amount}</TableCell>
+                        <TableCell>
+                            <Badge variant={t.type === "credit" ? "default":"destructive"}>{t.type}</Badge>
+                        </TableCell>
                         <TableCell>{t.description}</TableCell>
-                        <TableCell className="text-right">{t.amount}</TableCell>
                     </TableRow>
                 ))}
 
@@ -56,16 +62,16 @@ const LedgerWidget: React.FC<LedgerWidgetProps> = ({ transactions }) => {
     )
 
     return (
-        <Card className="w-1/2 flex flex-col justify-center items-center m-2">
+        <Card className="h-5/6 w-1/2 flex flex-col justify-center items-center">
             <CardHeader>
-                <CardTitle>Card Title</CardTitle>
-                <CardDescription>Card Description</CardDescription>
+                <CardTitle>All Transactions</CardTitle>
+                <CardDescription>List of all transactions</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="h-80 overflow-auto">
                 {transactionTable}
             </CardContent>
             <CardFooter>
-                <p>Card Footer</p>
+                <p></p>
             </CardFooter>
         </Card>
     )
