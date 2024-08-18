@@ -9,12 +9,12 @@ import Settings from "@/components/settings-widget"
 export default function Home() {
   const [transactions, setTransactions] = useState<Transaction[]>([])
   return (
-    <main className="w-screen h-screen flex flex-col">
-      <Ledger transactions={transactions}/>
+    <main className="w-screen h-screen flex flex-wrap">
       <AddTransaction 
         setTransactions={setTransactions}
         transactions={transactions}
       />
+      <Ledger transactions={transactions}/>
       {/* <Bucket/> */}
       {/* <Settings/> */}
     </main>
