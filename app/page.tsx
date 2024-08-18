@@ -5,25 +5,24 @@ import AddTransaction from "@/components/add-transaction-widget"
 import Ledger from "@/components/ledger-widget"
 import Bucket from "@/components/bucket-widget"
 import Settings from "@/components/settings-widget"
-import { createClient } from '@/utils/supabase/client'
-import { cookies } from 'next/headers'
+// import { createClient } from '@/utils/supabase/client'
+// import { cookies } from 'next/headers'
+import { supabase } from '@/utils/supabase/client'
 
 export default function Home() {
 
   const [transactions, setTransactions] = useState<Transaction[]>([])
   // const cookieStore = cookies()
-  const supabase = createClient()
 
-  const testTodos = async () => {
-    const { data: todos } = await supabase.from('transactions').select()
-    console.log('We have todos', todos)
+  const getTransactionData = async () => {
+    const { data } = await supabase.from('transactions').select()
+    if (!data) return
+    setTransactions(data)
   }
 
   useEffect(() => {
-    testTodos()
-    
-  },[])
-
+    getTransactionData()
+  }, [])
 
   return (
     <main className="w-screen flex overflow-hidden">

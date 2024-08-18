@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Transaction } from "@/types"
 import DatePicker from "@/components/date-picker"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { supabase } from '@/utils/supabase/client'
 
 import {
   Card,
@@ -28,7 +29,7 @@ const AddTransactionWidget: React.FC<AddTransactionProps> = ({ setTransactions, 
   const [amount, setAmount] = useState<number>(0)
   const [description, setDescription] = useState<string>("-")
 
-  const addTransaction = () => {
+  const addTransaction = async () => {
     if (!amount) return alert("Please enter an amount greater than zero")
 
     const newTransaction: Transaction = {
@@ -38,6 +39,11 @@ const AddTransactionWidget: React.FC<AddTransactionProps> = ({ setTransactions, 
       type: tabValue,
       date: date
     }
+
+    const { error } = await supabase
+    .from('transactions')
+    .insert(newTransaction)
+
 
     const newTransactionLedger = [...transactions, newTransaction]
     setTransactions(newTransactionLedger)

@@ -43,19 +43,22 @@ const LedgerWidget: React.FC<LedgerWidgetProps> = ({ transactions }) => {
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {transactions.map(t => (
-                    <TableRow>
-                        <TableCell className="font-medium">{t.id}</TableCell>
-                        <TableCell className="text-center">
-                            { t.date && `${String(t.date.getMonth() + 1)}/${String(t.date.getDate()).padStart(2, '0')}`}
-                        </TableCell>
-                        <TableCell className="text-center">${t.amount}</TableCell>
-                        <TableCell>
-                            <Badge variant={t.type === "credit" ? "default":"destructive"}>{t.type}</Badge>
-                        </TableCell>
-                        <TableCell>{t.description}</TableCell>
-                    </TableRow>
-                ))}
+                {transactions.map(t => {
+
+                    return (
+                        <TableRow>
+                            <TableCell className="font-medium">{t.id}</TableCell>
+                            <TableCell className="text-center">
+                                { t.date && `${t.date}`}
+                            </TableCell>
+                            <TableCell className="text-center">${t.amount}</TableCell>
+                            <TableCell>
+                                <Badge variant={t.type === "credit" ? "default":"destructive"}>{t.type}</Badge>
+                            </TableCell>
+                            <TableCell>{t.description}</TableCell>
+                        </TableRow>
+                    )
+                })}
 
             </TableBody>
         </Table>
