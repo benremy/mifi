@@ -26,8 +26,9 @@ interface AddTransactionProps {
 const AddTransactionWidget: React.FC<AddTransactionProps> = ({ setTransactions, transactions }) => {
   const [date, setDate] = useState<Date | undefined>(new Date())
   const [tabValue, setTabValue] = useState<string>("debit")
+  const [bucket, setBucket] = useState<string>("")
   const [amount, setAmount] = useState<number>(0)
-  const [description, setDescription] = useState<string>("-")
+  const [description, setDescription] = useState<string>("")
 
   const addTransaction = async () => {
     if (!amount) return alert("Please enter an amount greater than zero")
@@ -37,7 +38,8 @@ const AddTransactionWidget: React.FC<AddTransactionProps> = ({ setTransactions, 
       amount: amount,
       description: description,
       type: tabValue,
-      date: date
+      date: date,
+      bucket: bucket
     }
 
     const { error } = await supabase
@@ -53,7 +55,7 @@ const AddTransactionWidget: React.FC<AddTransactionProps> = ({ setTransactions, 
   }
 
   return (
-    <Card className="h-5/6 w-1/2 flex flex-col justify-center items-center">
+    <Card className="h-5/6 flex flex-col justify-center md:w-1/3 items-center">
       <CardHeader className="items-center">
         <CardTitle>Add Transaction</CardTitle>
         <CardDescription>Add a transaction to your ledger</CardDescription>
@@ -75,15 +77,29 @@ const AddTransactionWidget: React.FC<AddTransactionProps> = ({ setTransactions, 
             </p>
           </div>
           <Input 
-            className="w-full" 
-            placeholder="amount" 
-            value={amount} 
+            className="mb-2 w-auto" 
+            placeholder="enter amount"
+            type="number"
+            value={amount}
+            min="0"
             onChange={e => setAmount(Number(e.target.value))}
+            onKeyDown={e => {
+              // Prevent the user from entering non-numeric values except for navigation keys
+              if (!/[\d\b]/.test(e.key) && !['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                e.preventDefault();
+              }
+            }}
           />
         </div>
+        <Input 
+            className="mb-2 w-auto" 
+            placeholder="enter bucket name" 
+            value={bucket} 
+            onChange={e => setBucket(e.target.value)}
+          />
         <Textarea 
-          className="w-full" 
-          placeholder="description"
+          className="w-auto"
+          placeholder="enter description"
           value={description}
           onChange={e => setDescription(e.target.value)}
         />

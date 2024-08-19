@@ -25,14 +25,14 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="w-screen flex overflow-hidden">
+    <main className="w-screen flex flex-col md:flex-row flex-wrap overflow-hidden">
       <AddTransaction 
         setTransactions={setTransactions}
         transactions={transactions}
       />
       <Ledger transactions={transactions}/>
-      {/* <Bucket/> */}
-      {/* <Settings/> */}
+      <Bucket/>
+      <Settings/>
     </main>
   );
 }

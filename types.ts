@@ -4,4 +4,5 @@ export type Transaction = {
     description: string;
     type: string;
     date: Date | undefined;
+    bucket: string;
 }  

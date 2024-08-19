@@ -39,12 +39,12 @@ const LedgerWidget: React.FC<LedgerWidgetProps> = ({ transactions }) => {
                     <TableHead>Date</TableHead>
                     <TableHead>Amount</TableHead>
                     <TableHead className="text-right">Type</TableHead>
+                    <TableHead>Bucket</TableHead>
                     <TableHead>Description</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
                 {transactions.map(t => {
-
                     return (
                         <TableRow>
                             <TableCell className="font-medium">{t.id}</TableCell>
@@ -55,17 +55,19 @@ const LedgerWidget: React.FC<LedgerWidgetProps> = ({ transactions }) => {
                             <TableCell>
                                 <Badge variant={t.type === "credit" ? "default":"destructive"}>{t.type}</Badge>
                             </TableCell>
+                            <TableCell>
+                                <Badge variant="outline">{t.bucket}</Badge>
+                            </TableCell>
                             <TableCell>{t.description}</TableCell>
                         </TableRow>
                     )
                 })}
-
             </TableBody>
         </Table>
     )
 
     return (
-        <Card className="h-5/6 w-1/2 flex flex-col justify-center items-center">
+        <Card className="h-5/6 md:w-1/3 flex flex-col justify-center items-center">
             <CardHeader>
                 <CardTitle>All Transactions</CardTitle>
                 <CardDescription>List of all transactions</CardDescription>
