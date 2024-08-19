@@ -6,4 +6,5 @@ export type Transaction = {
     date: Date | undefined;
     bucket: string;
     user_id: string;
+    account: string;
 }  

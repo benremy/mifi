@@ -77,10 +77,13 @@ export default function Home() {
         setTransactions={setTransactions}
         transactions={transactions}
       />
-      <Ledger transactions={transactions}/>
+      <Ledger 
+        transactions={transactions}
+        setTransactions={setTransactions}
+      />
       {/* <Bucket/> */}
       {/* <Settings/> */}
-      <Button onClick={handleSignOut}>Sign Out</Button>
+      {/* <Button onClick={handleSignOut}>Sign Out</Button> */}
     </main>
   );
 }

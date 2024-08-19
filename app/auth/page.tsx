@@ -43,7 +43,7 @@ export default function AuthPage() {
 
   const signUp = async () => {
     if (inviteCode !== process.env.NEXT_PUBLIC_INVITE_CODE) {
-      console.log('process invite code', process.env.INVITE_CODE)
+      console.log('process invite code', process.env.NEXT_PUBLIC_INVITE_CODE)
       return alert('Please enter valid invitation code')
     }
 

@@ -31,6 +31,7 @@ const AddTransactionWidget: React.FC<AddTransactionProps> = ({ setTransactions, 
   const [cents, setCents] = useState<string>("")
   const [amount, setAmount] = useState<string>("")
   const [description, setDescription] = useState<string>("")
+  const [account, setAccount] = useState<string>("")
 
   const addTransaction = async () => {
     if (!amount) return alert("Please enter an amount greater than zero")
@@ -43,7 +44,8 @@ const AddTransactionWidget: React.FC<AddTransactionProps> = ({ setTransactions, 
       type: tabValue,
       date: date,
       bucket: bucket || "uncategorized",
-      user_id: user
+      user_id: user,
+      account: account
     }
 
     const { error } = await supabase
@@ -88,7 +90,7 @@ const AddTransactionWidget: React.FC<AddTransactionProps> = ({ setTransactions, 
 };
 
   return (
-    <Card className="h-5/6 flex flex-col justify-center md:w-1/3 items-center">
+    <Card className="h-5/6 flex flex-col justify-center items-center">
       <CardHeader className="items-center">
         <CardTitle>Add Transaction</CardTitle>
         <CardDescription>Add a transaction to your ledger</CardDescription>
@@ -134,6 +136,12 @@ const AddTransactionWidget: React.FC<AddTransactionProps> = ({ setTransactions, 
             placeholder="enter bucket name" 
             value={bucket} 
             onChange={e => setBucket(e.target.value)}
+          />
+          <Input 
+            className="mb-2 w-auto" 
+            placeholder="enter account name" 
+            value={account} 
+            onChange={e => setAccount(e.target.value)}
           />
         <Textarea 
           className="w-auto"
