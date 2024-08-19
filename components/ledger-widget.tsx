@@ -67,7 +67,7 @@ const LedgerWidget: React.FC<LedgerWidgetProps> = ({ transactions }) => {
     )
 
     return (
-        <Card className="h-5/6 md:w-1/3 flex flex-col justify-center items-center">
+        <Card className="h-full md:w-1/3 flex flex-col justify-center items-center">
             <CardHeader>
                 <CardTitle>All Transactions</CardTitle>
                 <CardDescription>List of all transactions</CardDescription>
