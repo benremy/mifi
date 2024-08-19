@@ -17,6 +17,7 @@ import {
 export default function AuthPage() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [inviteCode, setInviteCode] = useState<string>('');
   const router = useRouter();
 
   // Redirect to Home if a user ID is found in localStorage
@@ -41,6 +42,11 @@ export default function AuthPage() {
   };
 
   const signUp = async () => {
+    if (inviteCode !== process.env.NEXT_PUBLIC_INVITE_CODE) {
+      console.log('process invite code', process.env.INVITE_CODE)
+      return alert('Please enter valid invitation code')
+    }
+
     const { error, data } = await supabase.auth.signUp({
       email,
       password,
@@ -61,6 +67,13 @@ export default function AuthPage() {
           <CardDescription>MIFI | Own Your Finances</CardDescription>
         </CardHeader>
         <CardContent className="h-80 overflow-auto flex flex-col justify-center items-center">
+          <Input
+            className="mb-2 w-auto"
+            type="password"
+            placeholder="Invitation Code"
+            value={inviteCode}
+            onChange={(e) => setInviteCode(e.target.value)}
+          />
           <Input
             className="mb-2 w-auto"
             type="email"
