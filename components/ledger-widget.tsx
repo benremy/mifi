@@ -61,7 +61,7 @@ const LedgerWidget: React.FC<LedgerWidgetProps> = ({ transactions, setTransactio
                 title: "Deletion Successful",
                 description: `Transaction with ID ${id} has been deleted.`,
             });
-        } catch (error) {
+        } catch (error: any) {
             toast({
                 title: "Deletion Failed",
                 description: `Failed to delete transaction with ID ${id}. ${error.message}`,
@@ -111,7 +111,7 @@ const LedgerWidget: React.FC<LedgerWidgetProps> = ({ transactions, setTransactio
                             <TableCell>
                             {confirmId === t.id ? (
                                 <>
-                                    <Button variant="destructive" onClick={() => handleConfirmDelete(t.id)}>
+                                    <Button variant="destructive" onClick={() => handleConfirmDelete(t.id as number)}>
                                         Confirm Delete
                                     </Button>
                                     <Button variant="outline" onClick={handleCancelDelete}>
@@ -119,7 +119,7 @@ const LedgerWidget: React.FC<LedgerWidgetProps> = ({ transactions, setTransactio
                                     </Button>
                                 </>
                             ) : (
-                                <Button variant="outline" size="icon" onClick={() => handleTrashClick(t.id)}>
+                                <Button variant="outline" size="icon" onClick={() => handleTrashClick(t.id as number)}>
                                     <Trash className="h-4 w-4" />
                                 </Button>
                             )}
