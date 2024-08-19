@@ -5,4 +5,5 @@ export type Transaction = {
     type: string;
     date: Date | undefined;
     bucket: string;
+    user_id: string;
 }  

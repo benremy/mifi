@@ -22,5 +22,5 @@ export default function SettingsWidget() {
             <p></p>
         </CardFooter>
     </Card>
-)
+  )
 }

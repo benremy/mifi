@@ -20,10 +20,11 @@ import {
 
 interface AddTransactionProps {
   transactions: Transaction[];
+  user: string;
   setTransactions: React.Dispatch<React.SetStateAction<Transaction[]>>;
 }
 
-const AddTransactionWidget: React.FC<AddTransactionProps> = ({ setTransactions, transactions }) => {
+const AddTransactionWidget: React.FC<AddTransactionProps> = ({ setTransactions, transactions, user }) => {
   const [date, setDate] = useState<Date | undefined>(new Date())
   const [tabValue, setTabValue] = useState<string>("debit")
   const [bucket, setBucket] = useState<string>("")
@@ -39,7 +40,8 @@ const AddTransactionWidget: React.FC<AddTransactionProps> = ({ setTransactions, 
       description: description,
       type: tabValue,
       date: date,
-      bucket: bucket
+      bucket: bucket,
+      user_id: user
     }
 
     const { error } = await supabase
@@ -79,7 +81,6 @@ const AddTransactionWidget: React.FC<AddTransactionProps> = ({ setTransactions, 
           <Input 
             className="mb-2 w-auto" 
             placeholder="enter amount"
-            type="number"
             value={amount}
             min="0"
             onChange={e => setAmount(Number(e.target.value))}
