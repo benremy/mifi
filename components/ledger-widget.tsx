@@ -137,7 +137,7 @@ const LedgerWidget: React.FC<LedgerWidgetProps> = ({ transactions, setTransactio
                 <CardTitle>All Transactions</CardTitle>
                 <CardDescription>List of all transactions</CardDescription>
             </CardHeader>
-            <CardContent className="h-80 overflow-auto">
+            <CardContent className="overflow-auto">
                 {transactionTable}
             </CardContent>
             <CardFooter>

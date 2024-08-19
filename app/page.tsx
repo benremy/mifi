@@ -81,7 +81,7 @@ export default function Home() {
         transactions={transactions}
         setTransactions={setTransactions}
       />
-      {/* <Bucket/> */}
+      <Bucket transactions={transactions}/>
       {/* <Settings/> */}
       {/* <Button onClick={handleSignOut}>Sign Out</Button> */}
     </main>
