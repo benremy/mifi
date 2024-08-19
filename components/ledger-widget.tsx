@@ -35,7 +35,7 @@ const LedgerWidget: React.FC<LedgerWidgetProps> = ({ transactions }) => {
             <TableCaption>{null}</TableCaption>
             <TableHeader>
                 <TableRow>
-                    <TableHead className="w-[100px]">ID</TableHead>
+                    <TableHead className="w-[100px]">#</TableHead>
                     <TableHead>Date</TableHead>
                     <TableHead>Amount</TableHead>
                     <TableHead className="text-right">Type</TableHead>
@@ -44,14 +44,14 @@ const LedgerWidget: React.FC<LedgerWidgetProps> = ({ transactions }) => {
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {transactions.map(t => {
+                {transactions.map((t,i) => {
                     return (
                         <TableRow key={t.id}>
-                            <TableCell className="font-medium">{t.id}</TableCell>
+                            <TableCell className="font-medium">{i+1}</TableCell>
                             <TableCell className="text-center">
                                 { t.date && `${t.date}`}
                             </TableCell>
-                            <TableCell className="text-center">${t.amount}</TableCell>
+                            <TableCell className="text-center">${ (t.amount / 100).toFixed(2) }</TableCell>
                             <TableCell>
                                 <Badge variant={t.type === "credit" ? "default":"destructive"}>{t.type}</Badge>
                             </TableCell>

@@ -32,7 +32,6 @@ export default function Home() {
     // Check localStorage for user ID on component mount
     const storedUserId = localStorage.getItem('userId');
     if (storedUserId) {
-      console.log('User exists', storedUserId)
       setUser(storedUserId);
       getTransactionData(storedUserId); // Fetch transactions if user is already logged in
     } else {
@@ -79,8 +78,8 @@ export default function Home() {
         transactions={transactions}
       />
       <Ledger transactions={transactions}/>
-      <Bucket/>
-      <Settings/>
+      {/* <Bucket/> */}
+      {/* <Settings/> */}
       <Button onClick={handleSignOut}>Sign Out</Button>
     </main>
   );

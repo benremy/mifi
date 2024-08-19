@@ -28,18 +28,21 @@ const AddTransactionWidget: React.FC<AddTransactionProps> = ({ setTransactions, 
   const [date, setDate] = useState<Date | undefined>(new Date())
   const [tabValue, setTabValue] = useState<string>("debit")
   const [bucket, setBucket] = useState<string>("")
-  const [amount, setAmount] = useState<number>(0)
+  const [cents, setCents] = useState<string>("")
+  const [amount, setAmount] = useState<string>("")
   const [description, setDescription] = useState<string>("")
 
   const addTransaction = async () => {
     if (!amount) return alert("Please enter an amount greater than zero")
 
+    const finalAmount = (parseFloat(amount) * 100) + parseFloat(cents)
+
     const newTransaction: Transaction = {
-      amount: amount,
+      amount: finalAmount,
       description: description,
       type: tabValue,
       date: date,
-      bucket: bucket,
+      bucket: bucket || "uncategorized",
       user_id: user
     }
 
@@ -52,8 +55,37 @@ const AddTransactionWidget: React.FC<AddTransactionProps> = ({ setTransactions, 
     setTransactions(newTransactionLedger)
 
     setDescription("");
-    setAmount(0);
+    setAmount("");
+    setCents("")
   }
+
+
+  // const formatAmount = (value: string) => {
+  //     // Remove any non-numeric characters (except for the decimal point)
+  //     const numericValue = value.replace(/[^0-9.]/g, '');
+      
+  //     // Split into integer and decimal parts
+  //     const [integerPart, decimalPart = ''] = numericValue.split('.');
+      
+  //     // Format integer and decimal parts
+  //     const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ','); // Add commas for thousands
+  //     const formattedDecimal = decimalPart.substring(0, 2); // Limit to 2 decimal places
+
+  //     // Combine formatted parts
+  //     return `${formattedInteger}${formattedDecimal.length ? `.${formattedDecimal}` : ''}`;
+  // };
+
+  const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      const numericValue = value.replace(/[^0-9]/g, '');
+      setAmount(numericValue);
+  };
+
+  const handleCentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const numericValue = value.replace(/[^0-9.]/g, '');
+    setCents(numericValue.substring(0,2));
+};
 
   return (
     <Card className="h-5/6 flex flex-col justify-center md:w-1/3 items-center">
@@ -78,17 +110,23 @@ const AddTransactionWidget: React.FC<AddTransactionProps> = ({ setTransactions, 
             </p>
           </div>
           <Input 
-            className="mb-2 w-auto" 
+            className="mb-2 w-auto text-center" 
             placeholder="enter amount"
             value={amount}
             min="0"
-            onChange={e => setAmount(Number(e.target.value))}
-            onKeyDown={e => {
-              // Prevent the user from entering non-numeric values except for navigation keys
-              if (!/[\d\b]/.test(e.key) && !['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
-                e.preventDefault();
-              }
-            }}
+            onChange={handleAmountChange}
+          />
+          <div className="flex text-slate-500 justify-center items-center">
+            <p className="p-1 flex">
+              <b>.</b>
+            </p>
+          </div>
+          <Input 
+            className="mb-2 w-14 text-center" 
+            placeholder="00"
+            value={cents}
+            min="0"
+            onChange={handleCentChange}
           />
         </div>
         <Input 
