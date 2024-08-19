@@ -44,7 +44,7 @@ export default function Home() {
       if (event === 'SIGNED_IN' && session?.user) {
         localStorage.setItem('userId', session.user.id);
         setUser(session.user.id);
-        getTransactionData(); // Fetch transactions on successful sign-in
+        getTransactionData(session.user.id); // Fetch transactions on successful sign-in
       } else if (event === 'SIGNED_OUT') {
         localStorage.removeItem('userId');
         setUser("");
