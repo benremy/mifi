@@ -35,7 +35,6 @@ const AddTransactionWidget: React.FC<AddTransactionProps> = ({ setTransactions, 
     if (!amount) return alert("Please enter an amount greater than zero")
 
     const newTransaction: Transaction = {
-      id: transactions.length + 1,
       amount: amount,
       description: description,
       type: tabValue,

@@ -46,7 +46,7 @@ const LedgerWidget: React.FC<LedgerWidgetProps> = ({ transactions }) => {
             <TableBody>
                 {transactions.map(t => {
                     return (
-                        <TableRow>
+                        <TableRow key={t.id}>
                             <TableCell className="font-medium">{t.id}</TableCell>
                             <TableCell className="text-center">
                                 { t.date && `${t.date}`}

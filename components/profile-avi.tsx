@@ -1,4 +1,4 @@
-impkort { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+// impkort { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
    
    {/* <Avatar>
         <AvatarImage src="https://github.com/shadcn.png" />
