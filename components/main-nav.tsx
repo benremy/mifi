@@ -1,4 +1,5 @@
 import React from "react"
+import ThemeToggle from "@/components/theme-toggle"
 
 import {
     NavigationMenu,
@@ -20,6 +21,9 @@ const MainNav: React.FC = () => {
             <NavigationMenuContent>
               <NavigationMenuLink>Link</NavigationMenuLink>
             </NavigationMenuContent>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <ThemeToggle/>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
