@@ -90,7 +90,7 @@ const AddTransactionWidget: React.FC<AddTransactionProps> = ({ setTransactions, 
 };
 
   return (
-    <Card className="h-full w-full flex flex-col justify-center items-center">
+    <Card className="h-full q flex flex-col justify-center items-center">
       <CardHeader className="items-center">
         <CardTitle>Add Transaction</CardTitle>
         <CardDescription>Add a transaction to your ledger</CardDescription>

@@ -59,7 +59,7 @@ export default function Home() {
     };
   }, [router]);
 
-  const handleSignOut = async () => {
+  const handleLogOut = async () => {
     const { error } = await supabase.auth.signOut();
     if (error) {
       console.log("Error w/ Signout", error);
@@ -72,9 +72,9 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col justify-evenly items-stretch">
-      {/* <Navigation/> */}
-        <div className="flex justify-evenly h-full flex-col md:flex-row">
+    <main className="flex flex-col">
+      <Navigation/>
+        <div className="flex flex-col md:flex-row gap-1 px-1">
           <AddTransaction
             user={user}
             setTransactions={setTransactions}
@@ -83,15 +83,14 @@ export default function Home() {
           <Bucket transactions={transactions}/>
         </div>
 
-        <div className="h-full w-full">
+        <div className="h-full w-full p-1">
           <Ledger
             transactions={transactions}
             setTransactions={setTransactions}
           />
         </div>
-      
-      {/* <Settings/> */}
-      {/* <Button onClick={handleSignOut}>Sign Out</Button> */}
+
+      <Button className="m-1" onClick={handleLogOut}>Log Out</Button>
     </main>
   );
 }
