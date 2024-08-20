@@ -3,6 +3,7 @@ import { Transaction } from '@/types'
 import { Trash } from "lucide-react"
 import { useToast } from "@/components/ui/use-toast"
 import { supabase } from "@/utils/supabase/client"
+import { format } from 'date-fns';
 
 import {
     Card,
@@ -95,7 +96,7 @@ const LedgerWidget: React.FC<LedgerWidgetProps> = ({ transactions, setTransactio
                         <TableRow key={t.id}>
                             <TableCell className="font-medium hidden lg:inline-block lg:pt-3.5">{i+1}</TableCell>
                             <TableCell className="text-center">
-                                { t.date && `${t.date}`}
+                                {t.date && format(new Date(t.date), 'MM/dd')}
                             </TableCell>
                             <TableCell className="text-center">${ (t.amount / 100).toFixed(2) }</TableCell>
                             <TableCell>
