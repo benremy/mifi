@@ -5,6 +5,7 @@ import AddTransaction from "@/components/add-transaction-widget";
 import Ledger from "@/components/ledger-widget";
 import Bucket from "@/components/bucket-widget";
 import Settings from "@/components/settings-widget";
+import Navigation from '@/components/main-nav';
 import { Button } from "@/components/ui/button";
 import { supabase } from '@/utils/supabase/client';
 import { useRouter } from 'next/navigation';
@@ -71,17 +72,24 @@ export default function Home() {
   };
 
   return (
-    <main className="w-screen flex flex-col md:flex-row flex-wrap overflow-hidden">
-      <AddTransaction
-        user={user}
-        setTransactions={setTransactions}
-        transactions={transactions}
-      />
-      <Ledger 
-        transactions={transactions}
-        setTransactions={setTransactions}
-      />
-      <Bucket transactions={transactions}/>
+    <main className="flex flex-col justify-evenly items-stretch">
+      {/* <Navigation/> */}
+        <div className="flex justify-evenly h-full flex-col md:flex-row">
+          <AddTransaction
+            user={user}
+            setTransactions={setTransactions}
+            transactions={transactions}
+          />
+          <Bucket transactions={transactions}/>
+        </div>
+
+        <div className="h-full w-full">
+          <Ledger
+            transactions={transactions}
+            setTransactions={setTransactions}
+          />
+        </div>
+      
       {/* <Settings/> */}
       {/* <Button onClick={handleSignOut}>Sign Out</Button> */}
     </main>

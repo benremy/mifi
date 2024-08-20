@@ -80,12 +80,12 @@ const LedgerWidget: React.FC<LedgerWidgetProps> = ({ transactions, setTransactio
             <TableCaption>{null}</TableCaption>
             <TableHeader>
                 <TableRow>
-                    <TableHead className="w-[100px]">#</TableHead>
+                    <TableHead className="w-[100px] hidden lg:inline-block lg:pt-3.5">#</TableHead>
                     <TableHead>Date</TableHead>
                     <TableHead>Amount</TableHead>
                     <TableHead>Type</TableHead>
-                    <TableHead>Account</TableHead>
-                    <TableHead>Bucket</TableHead>
+                    <TableHead className="hidden lg:inline-block lg:pt-3.5 ">Account</TableHead>
+                    <TableHead className="hidden lg:inline-block lg:pt-3.5">Bucket</TableHead>
                     <TableHead>Description</TableHead>
                 </TableRow>
             </TableHeader>
@@ -93,7 +93,7 @@ const LedgerWidget: React.FC<LedgerWidgetProps> = ({ transactions, setTransactio
                 {transactions.map((t,i) => {
                     return (
                         <TableRow key={t.id}>
-                            <TableCell className="font-medium">{i+1}</TableCell>
+                            <TableCell className="font-medium hidden lg:inline-block lg:pt-3.5">{i+1}</TableCell>
                             <TableCell className="text-center">
                                 { t.date && `${t.date}`}
                             </TableCell>
@@ -101,14 +101,14 @@ const LedgerWidget: React.FC<LedgerWidgetProps> = ({ transactions, setTransactio
                             <TableCell>
                                 <Badge variant={t.type === "credit" ? "default":"destructive"}>{t.type}</Badge>
                             </TableCell>
-                            <TableCell>
+                            <TableCell className="hidden lg:inline-block lg:pt-3.5">
                                 <Badge variant="outline">{t.account}</Badge>
                             </TableCell>
-                            <TableCell>
-                                <Badge variant="outline">{t.bucket}</Badge>
+                            <TableCell className="hidden lg:inline-block lg:pt-3.5">
+                                <Badge variant="outline" >{t.bucket}</Badge>
                             </TableCell>
                             <TableCell>{t.description}</TableCell>
-                            <TableCell>
+                            <TableCell className="hidden lg:inline-block lg:pt-3.5">
                             {confirmId === t.id ? (
                                 <>
                                     <Button variant="destructive" onClick={() => handleConfirmDelete(t.id as number)}>

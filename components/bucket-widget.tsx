@@ -28,7 +28,7 @@ const BucketWidget: React.FC<BucketWidgetProps> = ({ transactions }) => {
     }, {} as Record<string, number>);
 
     return (
-        <Card className="flex flex-col md:w-1/3 justify-center items-center">
+        <Card className="flex flex-col w-full justify-center items-center">
             <CardHeader>
                 <CardTitle>Buckets</CardTitle>
                 <CardDescription>Categories for your transactions</CardDescription>
